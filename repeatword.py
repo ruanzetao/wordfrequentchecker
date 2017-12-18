@@ -10,13 +10,20 @@ Organisation  :  LICO TECH
 import requests
 from bs4 import BeautifulSoup
 import operator
+import sys
+#import string
+#import codecs
+
+
 
 
 def start(url):
+    #sys.stdin = codecs.getreader('utf_8')(sys.stdin)
     word_list = []
     error = 0
     src = requests.get(url).text
-    soup = BeautifulSoup(src)
+    soup = BeautifulSoup(src,"html.parser")
+    #unicode(soup,"utf_8")
     for para in soup.findAll('p'):
         content = para.string
         try:
@@ -40,6 +47,7 @@ def clean_list(word_list):
 
 
 def frequency(uncleanlist):
+    #sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
     words_list = {}
     for word in uncleanlist:
         if word in words_list:
@@ -47,6 +55,7 @@ def frequency(uncleanlist):
         else:
             words_list[word] = 1
     for key, value in sorted(words_list.items(), key=operator.itemgetter(1)):
+        #key.decode('utf8')
         print(key, value)
 
-start("http://localhost/wordChecker/index2.html")
+start("http://localhost/wordfrequentchecker/index.html")
