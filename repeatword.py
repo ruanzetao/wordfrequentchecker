@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Title         :  Keywords Generator
 About         :  Simple program to find how much times a word repeat a webpage.
@@ -5,6 +7,7 @@ Author        :  Satheesh Kumar D
 Date          :  07-05-2017
 Organisation  :  LICO TECH
 """
+
 
 
 import requests
