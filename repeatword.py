@@ -16,7 +16,7 @@ import operator
 import sys
 #import string
 #import codecs
-
+#chcp 65001
 
 
 
