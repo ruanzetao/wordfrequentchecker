@@ -17,18 +17,33 @@ import sys
 #import string
 #import codecs
 #chcp 65001
-
+import urllib3
+#from BeautifulSoup import BeautifulSoup
+import urllib.request
 
 
 def start(url):
     #sys.stdin = codecs.getreader('utf_8')(sys.stdin)
     word_list = []
     error = 0
-    src = requests.get(url).text
-    soup = BeautifulSoup(src,"html.parser")
+    #src = requests.get(url).text
+    #soup = BeautifulSoup(src,"html.parser")
     #unicode(soup,"utf_8")
+    
+    request = urllib.request.Request(url)
+    request.add_header('Accept-Encoding', 'utf-8')
+
+    # Response has UTF-8 charset header,
+    # and HTML body which is UTF-8 encoded
+    response = urllib.request.urlopen(request)
+
+    # Parse with BeautifulSoup
+    soup = BeautifulSoup(response)
+
+
     for para in soup.findAll('p'):
         content = para.string
+        print(content)
         try:
             words = content.lower().split()
         except AttributeError:
